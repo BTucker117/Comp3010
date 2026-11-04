@@ -4,7 +4,7 @@ All evidence used within and to support my incident report for CW1
 Open Source AI: Ollama hosted qwen3:8b<br>
 Run via the python script to capture all prompts & responses<br>
 
-Investigation screenshots captured in:
+Investigation screenshots captured in:<br>
 Wireshark Windows app,<br>
 Windows Google Chrome,<br>
 Windows Notepad,<br>
