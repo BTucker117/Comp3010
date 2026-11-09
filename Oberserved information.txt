@@ -1,0 +1,6 @@
+Both PCAP & Snort files begin the recording at 13:38 on the 27th of June 2017
+Strangely, Suricata starts at 00:14 on the 28th of June 2017. This could be a delayed response, the host node being configured with an alternative time zone or time offset.
+
+All files show various external GET requests leading back to 192.168.1.96, this is not inherently suspicious. But Snort shows executable files being downloaded, Suricata flags them as potentially hostile and the PCAP artefact hashes have a virus total score so are very likely to be what triggered the alerts from Suricata & Snort.
+
+Searching the host name for gerv.gun shows a mail scam where a supposed invoice in a zip file contained a dangerous JavaScript file that triggered a local WinHTTP call. This gerv.gun presumably ran on the host to then download the trow.exe & wp.exe files which injected the PUSHDO Trojan virus that both Snort & Suricata picked up.
