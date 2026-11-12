@@ -1,0 +1,41 @@
+This is my Comp3010 Intrusion Detection Report Video. If we begin by looking at the 
+given Suricata file, we can see that there is a WinHttp Downloading EXE alert, and 
+looking to the above alert we can see it is smaller than 1 MB and is likely hostile.
+
+If we note this IP address 192.168.1.96 and search for it with our PCAP file, also
+filtering by Http. We can see the initial download of a malicious file, being this
+gerv.gun file. If we continue to look down the list of requests we can see another 2
+executable files, which we suspect are malicious. 
+
+Wireshark:
+http && ip.addr == 192.168.1.96 - 6, 313 & 667
+dhcp - 213, Dynamic, Option 12
+
+To confirm if they are malicious or not, we can come up to File > Export Objects > Http
+and select a file, save and then gain our file hash by running the following command in
+our terminal.
+
+sudo sha256sum wp.exe
+79d503165d32176842fe386d96c04fb70f6ce1c8a485837957849297e625ea48
+
+We can now take this hash and search reputable malware tracking sites like VirusTotal 
+while making sure we gather additional evidence from a second site to confirm our
+findings, I will be using Hybrid analysis.
+
+Here we can see both sites show this executable file to be malicious, and looking at
+the other 2 files very quickly we can see both of these are also malicious.
+
+To understand the method of attack I searched for the initial gerv.gun files source
+which leads to this article that outlines the file is spread through a malicious email
+zip pretending to be an invoice, directly sent to someone in a spearphishing attack.
+
+If we continue further to the references we can follow this specific reference to this
+page where we find some more information about the malicious file which is a JavaScript
+file, searching this files name again provides few results but one is this Japanese blog
+post that gives us the sha256 hashes of the JavaScript files which we can assume based
+on the evidence that we have to be the culprit of this attack. 
+
+To confirm this the host will need to be forensically analysed, before advance malware
+with sandbox capabilities, more firewalls & up to date configurations and staff training
+accompanied with simulated phishing attacks put in place to reduce the chance of this 
+type of attack happening again.
